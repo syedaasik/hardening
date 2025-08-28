@@ -57,3 +57,23 @@ Cmnd_Alias DEV_CMDS = /opt/tomcat11/bin/./startup.sh, \
 opensuse:~ # 
 opensuse:~ # cat /etc/sudoers.d/developers 
 %developers	ALL=(ALL)	NOPASSWD: DEV_CMDS 
+
+
+recommendation
+-> security tightening [user levels]
+   -> sudo policies
+   -> pam policies
+   -> ssh hardening
+   -> user policies 
+   -> credential expiries
+   -> ssh key based authentication [long term perspective]
+   -> monitoring metrics packages
+   
+   
+-> partitioning
+   -> assigning specific storage for data disk and application disk. [Isolating OS from app and data]
+   -> server name nomenclature [ prod, development ]
+   -> user name nomenclature 
+
+-> patching 
+   -> patch flow dev and production 
