@@ -39,3 +39,21 @@ cat /etc/issue
 * Unauthorized access is STRICTLY PROHIBITED and may lead to  *
 * disciplinary action, prosecution, or both.                  *
 ***************************************************************
+
+
+opensuse:~ # cat /etc/sudoers.d/cmds 
+Cmnd_Alias DEV_CMDS = /opt/tomcat11/bin/./startup.sh, \
+                      /opt/tomcat11/bin/./shutdown.sh, \
+                      /usr/bin/npm install, \
+                      /usr/bin/npm run build, \ 
+                      /usr/bin/npm cache --force, \ 
+                      /usr/bin/npm uninstall, \
+                      /usr/bin/pm2 stop, \
+                      /usr/bin/pm2 list, \ 
+                      /usr/bin/pm2 status, \ 
+                      /usr/bin/pm2 delete, \ 
+                      /usr/bin/pm2 show, \ 
+                      /usr/bin/pm2 log 
+opensuse:~ # 
+opensuse:~ # cat /etc/sudoers.d/developers 
+%developers	ALL=(ALL)	NOPASSWD: DEV_CMDS 
