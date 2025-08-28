@@ -1,0 +1,32 @@
+opensuse:~ # cat /etc/pam.d/sshd 
+#%PAM-1.0
+auth        requisite   pam_nologin.so
+auth        required    pam_tally2.so deny=5 onerr=fail unlock_time=600 audit
+auth        include     common-auth
+
+account     requisite   pam_nologin.so
+account     required    pam_tally2.so audit
+account     include     common-account
+
+password    include     common-password
+
+session     required    pam_loginuid.so
+session     optional    pam_keyinit.so   force revoke
+session     include     common-session
+session     optional    pam_motd.so
+
+
+opensuse:~ # cat /etc/ssh/sshd_config | egrep -v '#|^$'
+Include /etc/ssh/sshd_config.d/*.conf
+Include /usr/etc/ssh/sshd_config.d/*.conf
+Banner	/etc/issue
+PermitRootLogin no
+AuthorizedKeysFile	.ssh/authorized_keys
+AllowGroups sshusers
+UsePAM yes
+X11Forwarding yes
+PrintMotd no
+Subsystem	sftp	/usr/lib/ssh/sftp-server
+AcceptEnv LANG LC_CTYPE LC_NUMERIC LC_TIME LC_COLLATE LC_MONETARY LC_MESSAGES
+AcceptEnv LC_PAPER LC_NAME LC_ADDRESS LC_TELEPHONE LC_MEASUREMENT
+AcceptEnv LC_IDENTIFICATION LC_ALL
